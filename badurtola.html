@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="impor.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Badurtola HighComission</title>
+    <meta name="description" content="Badurtola HighCommission is a Minecraft server built on community, creativity, and adventure. Join us for an unforgettable experience!">
+    <meta property="og:title" content="Badurtola HighCommission">
+    <meta property="og:description" content="Badurtola HighCommission is a Minecraft server built on community, creativity, and adventure. Join us for an unforgettable experience!">
+    <meta property="og:image" content="loaded/logo.png">
+    <meta property="og:url" content="http:minecraft.nafisulbari.com">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cossette+Titre:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="loaded/logo.png" imagesrcset="loaded/logo.png" fetchpriority="high">
+    <link rel="preload" as="image" href="showcase/1.png">
+    <link rel="preload" as="image" href="showcase/2.png">
+    <link rel="preload" as="image" href="showcase/3.png">
+    <link rel="preload" as="image" href="showcase/4.png">
+    <link rel="preload" as="image" href="showcase/5.png">
+    <link rel="preload" as="image" href="showcase/6.png">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.8/dist/hls.min.js" defer></script>
+</head>
+
+<body class="light-theme">
+
+    <header id="main-header" class="fixed top-0 left-0 w-full py-8 transition-all duration-300 ease-in-out z-50">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <a href="#hero-section" class="flex-shrink-0">
+                <img src="loaded/logo.png" alt="Badurtola HighComission"
+                    class="h-12 w-auto transition-all duration-300 ease-in-out">
+            </a>
+
+            <div class="flex items-center space-x-4">
+                <button id="hamburger-btn"
+                    class="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                        stroke="currentColor" class="w-8 h-8 text-gray-300">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+
+                <label class="switch">
+                    <span class="sun"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <g fill="#ffd43b">
+                                <circle r="5" cy="12" cx="12"></circle>
+                                <path
+                                    d="m21 13h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm-17 0h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm13.66-5.66a1 1 0 0 1 -.66-.29 1 1 0 0 1 0-1.41l.71-.71a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 0 1 -.75.29zm-12.02 12.02a1 1 0 0 1 -.71-.29 1 1 0 0 1 0-1.41l.71-.66a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1 -.7.24zm6.36-14.36a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm0 17a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm-5.66-14.66a1 1 0 0 1 -.7-.29l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.29zm12.02 12.02a1 1 0 0 1 -.7-.29l-.66-.71a1 1 0 0 1 1.36-1.36l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.24z">
+                                </path>
+                            </g>
+                        </svg></span>
+                    <span class="moon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                            <path
+                                d="m223.5 32c-123.5 0-223.5 100.3-223.5 224s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z">
+                            </path>
+                        </svg></span>
+                    <input type="checkbox" class="input">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+    </header>
+
+    <div id="progress-bar"></div>
+
+    <div id="full-screen-menu"
+        class="fixed top-0 left-0 w-full h-full bg-gray-900 z-50 transform translate-x-full transition-transform duration-500 ease-in-out">
+        <button id="menu-close-btn" class="absolute top-8 right-8 text-white">
+            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+
+        <nav class="flex flex-col items-center space-y-8">
+            <a href="#hero-section"
+                class="text-white text-3xl font-bold hover:text-emerald-400 transition-colors duration-200">Home</a>
+            <a href="#features-section"
+                class="text-white text-3xl font-bold hover:text-emerald-400 transition-colors duration-200">Features</a>
+            <a href="#showcase-section"
+                class="text-white text-3xl font-bold hover:text-emerald-400 transition-colors duration-200">Showcase</a>
+            <a href="#vote-section"
+                class="text-white text-3xl font-bold hover:text-emerald-400 transition-colors duration-200">Vote</a>
+            <a href="#GAMEMODES"
+                class="text-white text-3xl font-bold hover:text-emerald-400 transition-colors duration-200">GAMEMODES</a>
+        </nav>
+    </div>
+
+    <div id="hero-section" class="hero-section">
+        <video id="hero-bg" class="parallax-bg" autoplay loop playsinline preload="auto" data-hls="gif/hero.m3u8">
+            <source src="gif/hero1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+
+        <div class="absolute bottom-4 left-4 z-10 flex gap-3">
+            <button id="hero-pause-btn" aria-label="Pause background video"
+                class="px-3 py-2 rounded-full bg-black/50 text-white backdrop-blur-sm hover:bg-black/60 transition">
+                <span class="inline-flex items-center gap-2">
+                    <svg id="hero-pause-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+                    <span id="hero-pause-label" class="hidden sm:inline">Pause</span>
+                </span>
+            </button>
+            <button id="hero-mute-btn" aria-label="Unmute background video"
+                class="px-3 py-2 rounded-full bg-black/50 text-white backdrop-blur-sm hover:bg-black/60 transition">
+                <span class="inline-flex items-center gap-2">
+                    <svg id="hero-volume-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M3 9v6h4l5 5V4L7 9H3z"/></svg>
+                    <span id="hero-mute-label" class="hidden sm:inline">Unmute</span>
+                </span>
+            </button>
+        </div>
+
+        <div class="hero-content text-center px-4">
+            <h1 class="text-5xl md:text-7xl font-bold text-white tracking-tight leading-tight mb-4 drop-shadow-lg hero-title">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400">Badurtola
+                    HighCommission</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-fixed-white mb-8 drop-shadow-md">
+                A Minecraft server built on community, creativity, and adventure.
+            </p>
+            <div class="relative group">
+                <div class="relative group">
+                    <a href="https://discord.gg/qRPzuHSjHc" target="_blank" rel="noopener noreferrer"
+                        class="relative group overflow-hidden px-8 py-3 bg-emerald-500 hover:bg-emerald-600 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg inline-block">
+                        <span class="relative z-10 text-white font-bold">JOIN SERVER</span>
+                        <span
+                            class="absolute top-1/2 left-1/2 w-48 h-48 bg-white opacity-0 group-hover:opacity-10 transition-all duration-500 -translate-x-1/2 -translate-y-1/2 rounded-full"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-16">
+
+        <section id="features-section" class="py-12 reveal-element">
+            <div class="container mx-auto text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-100">OUR SERVER</h2>
+                <p class="text-gray-400 mt-2">Some of our features.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-center reveal-element">
+                <div class="bg-gray-1000 p-8 duration-300">
+                    <div class="mb-4">
+                        <svg class="h-16 w-16 text-emerald-400 mx-auto" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Fast, like Sonic</h3>
+                    <p class="text-gray-400">With premium hardware and BDIX connectivity, it's faster than a flying
+                        elytra!</p>
+                </div>
+
+                <div class="bg-gray-1000 p-8 duration-300">
+                    <div class="mt-auto flex justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="64" viewBox="0 -960 960 960" width="64"
+                            fill="#34d399">
+                            <path
+                                d="M0-240v-63q0-43 44-70t116-27q13 0 25 .5t23 2.5q-14 21-21 44t-7 48v65H0Zm240 0v-65q0-32 17.5-58.5T307-410q32-20 76.5-30t96.5-10q53 0 97.5 10t76.5 30q32 20 49 46.5t17 58.5v65H240Zm540 0v-65q0-26-6.5-49T754-397q11-2 22.5-2.5t23.5-.5q72 0 116 26.5t44 70.5v63H780Zm-455-80h311q-10-20-55.5-35T480-370q-55 0-100.5 15T325-320ZM160-440q-33 0-56.5-23.5T80-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T160-440Zm640 0q-33 0-56.5-23.5T720-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T800-440Zm-320-40q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T600-600q0 50-34.5 85T480-480Zm0-80q17 0 28.5-11.5T520-600q0-17-11.5-28.5T480-640q-17 0-28.5 11.5T440-600q0 17 11.5 28.5T480-560Zm1 240Zm-1-280Z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Small Community</h3>
+                    <p class="text-gray-400">We are a small group of friends, enjoying a good game together!</p>
+                </div>
+
+                <div class="bg-gray-1000 p-8 duration-300">
+                    <div class="mt-auto flex justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="64" viewBox="0 -960 960 960" width="64"
+                            fill="#34d399">
+                            <path
+                                d="M300-720q-25 0-42.5 17.5T240-660q0 25 17.5 42.5T300-600q25 0 42.5-17.5T360-660q0-25-17.5-42.5T300-720Zm0 400q-25 0-42.5 17.5T240-260q0 25 17.5 42.5T300-200q25 0 42.5-17.5T360-260q0-25-17.5-42.5T300-320ZM160-840h640q17 0 28.5 11.5T840-800v280q0 17-11.5 28.5T800-480H160q-17 0-28.5-11.5T120-520v-280q0-17 11.5-28.5T160-840Zm40 80v200h560v-200H200Zm-40 320h640q17 0 28.5 11.5T840-400v280q0 17-11.5 28.5T800-80H160q-17 0-28.5-11.5T120-120v-280q0-17 11.5-28.5T160-440Zm40 80v200h560v-200H200Zm0-400v200-200Zm0 400v200-200Z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Always Online</h3>
+                    <p class="text-gray-400">Our server has a 98.5% uptime, so you'll be playing whenever you want!</p>
+                </div>
+
+                <div class="bg-gray-1000 p-8 duration-300">
+                    <div class="mt-auto flex justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="64" viewBox="0 -960 960 960" width="64"
+                            fill="#34d399">
+                            <path
+                                d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Amazing Activities</h3>
+                    <p class="text-gray-400">We do some super fun building and adventure together, it's amazing,
+                        seriously, the best!</p>
+                </div>
+
+                <div class="bg-gray-1000 p-8 duration-300">
+                    <div class="mb-4">
+                        <svg class="h-16 w-16 text-emerald-400 mx-auto" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 4c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM12 18a6 6 0 100-12 6 6 0 000 12zM12 15a3 3 0 100-6 3 3 0 000 6z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Few Plugins</h3>
+                    <p class="text-gray-400">Only using <a
+                            href="https://www.spigotmc.org/resources/griefprevention.1884/" target="_blank"
+                            class="text-blue-400 hover:text-blue-500 underline transition-colors duration-200">Grief
+                            Prevention</a> and <a
+                            href="https://www.spigotmc.org/resources/%E2%9C%A6-jails-secure-prison-system-escape-detections-punishment-system-easy-setup.124623/"
+                            target="_blank"
+                            class="text-blue-400 hover:text-blue-500 underline transition-colors duration-200">Jails+</a>
+                        to protect myself from being trolled!</p>
+                </div>
+
+                <div class="bg-gray-1000 p-8 duration-300">
+                    <div class="mt-auto flex justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="64" viewBox="0 -960 960 960" width="64"
+                            fill="#34d399">
+                            <path
+                                d="m377-80-57-57 184-183 56 56L377-80Zm199 0-56-57 163-163 57 56L576-80ZM137-520l-57-56 164-164 56 57-163 163Zm0 200-57-57 184-183 56 56-183 184Zm623-21-96-239-78 78 19 94-47 48-71-128-127-70 47-48 94 19 78-78-239-95 60-57 287 45 91-90q9-9 20-13.5t22-4.5q11 0 22 4.5t20 13.5q9 8 13.5 19t4.5 22q0 11-4.5 22.5T862-778l-91 90 45 287-56 60Z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Fighter Jet</h3>
+                    <p class="text-gray-400">This isn't a feature, but I just really like fighter jets, nah it's a
+                        filler.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="showcase-section" class="py-12 reveal-element">
+            <div class="container mx-auto text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-100">Community Showcase</h2>
+                <p class="text-gray-400 mt-2">Explore amazing creations from our community members.</p>
+            </div>
+
+            <div class="flex justify-center space-x-4 mb-8">
+                <button id="season1-btn"
+                    class="season-toggle-btn active px-6 py-2 rounded-full font-semibold transition-colors duration-300">Season
+                    1</button>
+                <button id="season2-btn"
+                    class="season-toggle-btn px-6 py-2 rounded-full font-semibold transition-colors duration-300">Season
+                    2</button>
+            </div>
+            <div class="image-gallery-container">
+                <div id="gallery-wrapper" class="image-gallery-wrapper">
+                    <div class="image-gallery" id="gallery-1"></div>
+                    <div class="image-gallery" id="gallery-2"></div>
+                </div>
+            </div>
+        </section>
+
+        <sectio-section" id="GAMEMODES" class="py-12 reveal-element">
+            <div class="container mx-auto text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-100">GAMEMODES</h2>
+                <p class="text-gray-400 mt-2">Stuff and things you can do on our server</p>
+            </div>
+            <div class="flex flex-col gap-12">
+                <div class="max-w-6xl mx-auto rounded-2xl overflow-hidden md:flex reveal-element">
+                    <div class="md:w-1/2 p-4 flex items-center justify-center">
+                        <img src="loaded/survival.png" alt="SURVIVAL" class="rounded-xl object-cover w-full h-full">
+                    </div>
+                    <div class="md:w-1/2 p-8 flex flex-col justify-center">
+                        <h3 class="text-3xl sm:text-4xl font-semibold leading-tight text-white mb-4">
+                            SURVIVAL
+                        </h3>
+                        <p class="text-gray-400 leading-relaxed text-base sm:text-lg">
+                            In Minecraft Survival mode, you get to dive into a fun and exciting adventure where the
+                            world is yours to explore! You
+                            start with just your hands and a big imagination. Your mission is to gather resources like
+                            wood, stone, and food while
+                            managing your health and hunger. As night falls, the world comes alive with all sorts of
+                            creatures, and you’ll need to
+                            build a cozy shelter to stay safe. Whether you’re mining for precious ores, crafting useful
+                            tools, or creating amazing
+                            structures, there’s always something new to discover. You can explore beautiful landscapes,
+                            from lush forests to
+                            towering mountains, and even meet friendly animals along the way. The best part? You can
+                            unleash your creativity and
+                            build whatever you dream up! So grab your pickaxe and get ready for endless fun in the world
+                            of Minecraft Survival!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="max-w-6xl mx-auto rounded-2xl overflow-hidden md:flex md:flex-row-reverse reveal-element">
+                    <div class="md:w-1/2 p-4 flex items-center justify-center">
+                        <img src="loaded/pvp.png" alt="PVP" class="rounded-xl object-cover w-full h-full">
+                    </div>
+                    <div class="md:w-1/2 p-8 flex flex-col justify-center">
+                        <h3 class="text-3xl sm:text-4xl font-semibold leading-tight text-white mb-4">
+                            PVP
+                        </h3>
+                        <p class="text-gray-400 leading-relaxed text-base sm:text-lg">
+                            Minecraft PvP is a chaotic dance where everyone forgot the rhythm. One moment you’re dodging
+                            arrows like a ninja, the next you’re chugging potions and swinging like you’re swatting
+                            mosquitos. Hours of grinding gear mean nothing when lag, luck, or a wooden sword send you
+                            flying. And in the great wars—like Wadiya vs Lannisters—it’s even wilder. Tridents, pearls,
+                            and questionable tactics turn battles into beautiful disasters, where victory belongs to
+                            whoever clicks faster… or just has better Wi-Fi.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="max-w-6xl mx-auto rounded-2xl overflow-hidden md:flex reveal-element">
+                    <div class="md:w-1/2 p-4 flex items-center justify-center">
+                        <img src="loaded/slow paced.png" alt="Slow Paced" class="rounded-xl object-cover w-full h-full">
+                    </div>
+                    <div class="md:w-1/2 p-8 flex flex-col justify-center">
+                        <h3 class="text-3xl sm:text-4xl font-semibold leading-tight text-white mb-4">
+                            Slow Paced
+                        </h3>
+                        <p class="text-gray-400 leading-relaxed text-base sm:text-lg">
+                            Minecraft benefits from a slow-paced approach because it fosters creativity, strategic
+                            depth, and exploration, allowing players to build intricate structures and embark on grand
+                            adventures without feeling rushed. The relaxed pace enhances the meditative,
+                            stress-relieving experience, giving players time to gather resources, plan complex projects,
+                            and enjoy the process of creation. In multiplayer, this slower tempo encourages meaningful
+                            interactions, teamwork, and community-building, while providing a peaceful escape from the
+                            high-intensity, fast-paced games that dominate the gaming landscape.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            </section>
+
+            <section id="vote-section" class="py-12 reveal-element">
+                <div class="container mx-auto text-center mb-12">
+                    <h2 class="text-4xl font-bold text-gray-100">Vote for Us!</h2>
+                    <p class="text-gray-400 mt-2">Help our server grow and climb the ranks by voting on these sites.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-center items-end reveal-element">
+                    <div class="p-6 rounded-xl shadow-lg flex flex-col items-center">
+                        <div class="mb-4">
+                            <img src="loaded/MinecraftMP.png" alt="MinecraftMP" class="w-32 h-32 mx-auto rounded-lg">
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">MinecraftMP</h3>
+                        <p class="text-gray-400 text-sm mb-4">Click the button below to vote for our server on
+                            MinecraftMP!
+                        </p>
+                        <a href="https://minecraft-mp.com/server-s347926" target="_blank" rel="noopener noreferrer"
+                            class="px-6 py-2 bg-emerald-500 hover:bg-emerald-600 rounded-full text-white font-bold transition-colors duration-200">
+                            Vote Now
+                        </a>
+                    </div>
+
+                    <div class="p-6 rounded-xl shadow-lg flex flex-col items-center">
+                        <div class="mb-4">
+                            <img src="loaded/PlanetMinecraft.png" alt="PlanetMinecraft"
+                                class="w-32 h-32 mx-auto rounded-lg">
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Planet Minecraft</h3>
+                        <p class="text-gray-400 text-sm mb-4">Show your support for us on PlanetMinecraft. Every vote
+                            helps!
+                        </p>
+                        <a href="https://www.planetminecraft.com/server/badurtola-highcommission/vote/" target="_blank"
+                            rel="noopener noreferrer"
+                            class="px-6 py-2 bg-emerald-500 hover:bg-emerald-600 rounded-full text-white font-bold transition-colors duration-200">
+                            Vote Now
+                        </a>
+                    </div>
+
+                    <div class="p-6 rounded-xl shadow-lg flex flex-col items-center">
+                        <div class="mb-4">
+                            <img src="loaded/ServerPact.png" alt="ServerPact" class="w-32 h-32 mx-auto rounded-lg">
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">ServerPact</h3>
+                        <p class="text-gray-400 text-sm mb-4">Click the button below to vote for our server on
+                            ServerPact!
+                        </p>
+                        <a href="https://www.serverpact.com/vote-47752" target="_blank" rel="noopener noreferrer"
+                            class="px-6 py-2 bg-emerald-500 hover:bg-emerald-600 rounded-full text-white font-bold transition-colors duration-200">
+                            Vote Now
+                        </a>
+                    </div>
+                </div>
+            </section>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 py-4">
+        <div
+            class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0">
+            <div class="text-center md:text-left">
+                <p>&copy; 2025 Badurtola HighComission. website made by the Player of badurtola</p>
+            </div>
+
+            <div class="flex flex-col items-center space-y-4 md:space-y-0 md:flex-row md:space-x-8">
+                <ul class="social-icons-list">
+                    <li class="icon-content">
+                        <a href="badurtola.html" aria-label="Facebook" data-social="facebook">
+                            <div class="filled"></div>
+                            <svg class="h-8 w-8 text-gray-400 group-hover:text-white" fill="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.873V14.89h-2.11v-2.89h2.11v-2.161c0-2.062 1.265-3.18 3.09-3.18 0.887 0 1.657 0.065 1.884 0.096v2.173h-1.284c-1.006 0-1.21.477-1.21 1.18V12h2.569l-0.334 2.89h-2.235v6.983C18.343 21.128 22 16.991 22 12z" />
+                            </svg>
+                        </a>
+                        <div class="tooltip">Facebook</div>
+                    </li>
+                    <li class="icon-content">
+                        <a href="https://discord.gg/qRPzuHSjHc" target="_blank" rel="noopener noreferrer aria-label="
+                            Discord" data-social="discord">
+                            <div class="filled"></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30"
+                                viewBox="0 0 50 50">
+                                <path
+                                    d="M 18.90625 7 C 18.90625 7 12.539063 7.4375 8.375 10.78125 C 8.355469 10.789063 8.332031 10.800781 8.3125 10.8125 C 7.589844 11.480469 7.046875 12.515625 6.375 14 C 5.703125 15.484375 4.992188 17.394531 4.34375 19.53125 C 3.050781 23.808594 2 29.058594 2 34 C 1.996094 34.175781 2.039063 34.347656 2.125 34.5 C 3.585938 37.066406 6.273438 38.617188 8.78125 39.59375 C 11.289063 40.570313 13.605469 40.960938 14.78125 41 C 15.113281 41.011719 15.429688 40.859375 15.625 40.59375 L 18.0625 37.21875 C 20.027344 37.683594 22.332031 38 25 38 C 27.667969 38 29.972656 37.683594 31.9375 37.21875 L 34.375 40.59375 C 34.570313 40.859375 34.886719 41.011719 35.21875 41 C 36.394531 40.960938 38.710938 40.570313 41.21875 39.59375 C 43.726563 38.617188 46.414063 37.066406 47.875 34.5 C 47.960938 34.347656 48.003906 34.175781 48 34 C 48 29.058594 46.949219 23.808594 45.65625 19.53125 C 45.007813 17.394531 44.296875 15.484375 43.625 14 C 42.953125 12.515625 42.410156 11.480469 41.6875 10.8125 C 41.667969 10.800781 41.644531 10.789063 41.625 10.78125 C 37.460938 7.4375 31.09375 7 31.09375 7 C 31.019531 6.992188 30.949219 6.992188 30.875 7 C 30.527344 7.046875 30.234375 7.273438 30.09375 7.59375 C 30.09375 7.59375 29.753906 8.339844 29.53125 9.40625 C 27.582031 9.09375 25.941406 9 25 9 C 24.058594 9 22.417969 9.09375 20.46875 9.40625 C 20.246094 8.339844 19.90625 7.59375 19.90625 7.59375 C 19.734375 7.203125 19.332031 6.964844 18.90625 7 Z M 18.28125 9.15625 C 18.355469 9.359375 18.40625 9.550781 18.46875 9.78125 C 16.214844 10.304688 13.746094 11.160156 11.4375 12.59375 C 11.074219 12.746094 10.835938 13.097656 10.824219 13.492188 C 10.816406 13.882813 11.039063 14.246094 11.390625 14.417969 C 11.746094 14.585938 12.167969 14.535156 12.46875 14.28125 C 17.101563 11.410156 22.996094 11 25 11 C 27.003906 11 32.898438 11.410156 37.53125 14.28125 C 37.832031 14.535156 38.253906 14.585938 38.609375 14.417969 C 38.960938 14.246094 39.183594 13.882813 39.175781 13.492188 C 39.164063 13.097656 38.925781 12.746094 38.5625 12.59375 C 36.253906 11.160156 33.785156 10.304688 31.53125 9.78125 C 31.59375 9.550781 31.644531 9.359375 31.71875 9.15625 C 32.859375 9.296875 37.292969 9.894531 40.3125 12.28125 C 40.507813 12.460938 41.1875 13.460938 41.8125 14.84375 C 42.4375 16.226563 43.09375 18.027344 43.71875 20.09375 C 44.9375 24.125 45.921875 29.097656 45.96875 33.65625 C 44.832031 35.496094 42.699219 36.863281 40.5 37.71875 C 38.5 38.496094 36.632813 38.84375 35.65625 38.9375 L 33.96875 36.65625 C 34.828125 36.378906 35.601563 36.078125 36.28125 35.78125 C 38.804688 34.671875 40.15625 33.5 40.15625 33.5 C 40.570313 33.128906 40.605469 32.492188 40.234375 32.078125 C 39.863281 31.664063 39.226563 31.628906 38.8125 32 C 38.8125 32 37.765625 32.957031 35.46875 33.96875 C 34.625 34.339844 33.601563 34.707031 32.4375 35.03125 C 32.167969 35 31.898438 35.078125 31.6875 35.25 C 29.824219 35.703125 27.609375 36 25 36 C 22.371094 36 20.152344 35.675781 18.28125 35.21875 C 18.070313 35.078125 17.8125 35.019531 17.5625 35.0625 C 16.394531 34.738281 15.378906 34.339844 14.53125 33.96875 C 12.234375 32.957031 11.1875 32 11.1875 32 C 10.960938 31.789063 10.648438 31.699219 10.34375 31.75 C 9.957031 31.808594 9.636719 32.085938 9.53125 32.464844 C 9.421875 32.839844 9.546875 33.246094 9.84375 33.5 C 9.84375 33.5 11.195313 34.671875 13.71875 35.78125 C 14.398438 36.078125 15.171875 36.378906 16.03125 36.65625 L 14.34375 38.9375 C 13.367188 38.84375 11.5 38.496094 9.5 37.71875 C 7.300781 36.863281 5.167969 35.496094 4.03125 33.65625 C 4.078125 29.097656 5.0625 24.125 6.28125 20.09375 C 6.90625 18.027344 7.5625 16.226563 8.1875 14.84375 C 8.8125 13.460938 9.492188 12.460938 9.6875 12.28125 C 12.707031 9.894531 17.140625 9.296875 18.28125 9.15625 Z M 18.5 21 C 15.949219 21 14 23.316406 14 26 C 14 28.683594 15.949219 31 18.5 31 C 21.050781 31 23 28.683594 23 26 C 23 23.316406 21.050781 21 18.5 21 Z M 31.5 21 C 28.949219 21 27 23.316406 27 26 C 27 28.683594 28.949219 31 31.5 31 C 34.050781 31 36 28.683594 36 26 C 36 23.316406 34.050781 21 31.5 21 Z M 18.5 23 C 19.816406 23 21 24.265625 21 26 C 21 27.734375 19.816406 29 18.5 29 C 17.183594 29 16 27.734375 16 26 C 16 24.265625 17.183594 23 18.5 23 Z M 31.5 23 C 32.816406 23 34 24.265625 34 26 C 34 27.734375 32.816406 29 31.5 29 C 30.183594 29 29 27.734375 29 26 C 29 24.265625 30.183594 23 31.5 23 Z">
+                                </path>
+                            </svg>
+                        </a>
+                        <div class="tooltip">Discord</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="text-sm">
+                <p class="font-semibold text-gray-200">HAVE A QUESTION?</p>
+                CONTACT US AT <a href="mailto:NAFISULBARI@GMAIL.COM" class="hover:underline">NAFISULBARI@GMAIL.COM</a>
+            </div>
+        </div>
+        </div>
+    </footer>
+
+    <div id="image-modal" class="modal fixed inset-0 z-50 flex items-center justify-center hidden">
+        <div class="relative w-full max-w-5xl mx-auto p-4 md:p-8">
+            <img id="modal-image" src="" alt="Enlarged community showcase image"
+                class="max-w-full max-h-[80vh] rounded-lg shadow-2xl mx-auto object-contain no-select">
+        </div>
+
+        <button id="close-modal-btn" class="modal-close-btn no-select">
+            &times;
+        </button>
+
+        <button id="prev-btn" class="modal-arrow-btn prev no-select">
+            &#8249;
+        </button>
+        <button id="next-btn" class="modal-arrow-btn next no-select">
+            &#8250;
+        </button>
+    </div>
+
+    <button id="scroll-to-top" aria-label="Scroll to top">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+        <span class="scroll-tooltip">Click To Scroll up</span>
+    </button>
+
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.35/dist/lenis.min.js"></script>
+    <script src="logic.js"></script>
+</body>
+</html>
