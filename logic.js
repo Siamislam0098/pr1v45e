@@ -25,39 +25,59 @@ document.addEventListener('DOMContentLoaded', () => {
             const progressBar = document.getElementById('progress-bar');
             const statusContainer = document.getElementById('status-container');
 
-            const SERVER_STATUS_API_URL = 'https://api.mcsrvstat.us/2/demo.minecraft.net';
 
             const seasonImages = {
                 season1: [
-                    { src: 'showcase/1.png', alt: '' },
-                    { src: 'showcase/2.png', alt: '' },
-                    { src: 'showcase/3.png', alt: '' },
-                    { src: 'showcase/4.png', alt: '' },
-                    { src: 'showcase/5.png', alt: '' },
-                    { src: 'showcase/6.png', alt: '' },
+                    { src: 'showcase/Season1/1.png', alt: '' },
+                    { src: 'showcase/Season1/2.png', alt: '' },
+                    { src: 'showcase/Season1/3.png', alt: '' },
+                    { src: 'showcase/Season1/4.png', alt: '' },
+                    { src: 'showcase/Season1/5.png', alt: '' },
+                    { src: 'showcase/Season1/6.png', alt: '' },
                 ],
                 season2: [
                 ]
             };
 
-            // Preload helper to eagerly fetch images
-            const preloadImages = (urls) => {
-                const uniqueUrls = Array.from(new Set(urls.filter(Boolean)));
-                return Promise.all(uniqueUrls.map((url) => new Promise((resolve) => {
+            // Lazy loading with blur placeholder
+            const createLazyImage = (src, alt, className = '') => {
+                const img = document.createElement('img');
+                img.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PC9zdmc+';
+                img.alt = alt;
+                img.className = `lazy-image lazy-image-placeholder ${className}`;
+                img.loading = 'lazy';
+                img.decoding = 'async';
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const targetImg = entry.target;
+                            const realImg = new Image();
+                            realImg.onload = () => {
+                                targetImg.src = src;
+                                targetImg.classList.add('loaded');
+                                targetImg.classList.remove('lazy-image-placeholder');
+                            };
+                            realImg.src = src;
+                            observer.unobserve(targetImg);
+                        }
+                    });
+                }, { rootMargin: '50px' });
+                
+                observer.observe(img);
+                return img;
+            };
+
+            // Preload critical images only
+            const preloadCriticalImages = (urls) => {
+                const criticalUrls = urls.slice(0, 5); // Only first 5 images
+                return Promise.all(criticalUrls.map((url) => new Promise((resolve) => {
                     const img = new Image();
                     img.decoding = 'sync';
                     img.loading = 'eager';
                     img.onload = img.onerror = () => resolve(url);
                     img.src = url;
                 })));
-            };
-
-            // Force all existing <img> tags to load eagerly (disables browser lazy-loading)
-            const forceEagerLoading = () => {
-                document.querySelectorAll('img').forEach((el) => {
-                    el.setAttribute('loading', 'eager');
-                    el.setAttribute('decoding', 'sync');
-                });
             };
 
             const gallery1 = document.getElementById('gallery-1');
@@ -80,13 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const renderImages = (container) => {
                     [...images, ...images].forEach((image, index) => { // Duplicate for seamless scroll
-                        const imgElement = document.createElement('img');
-                        imgElement.src = image.src;
-                        imgElement.fetchPriority = 'high';
-                        imgElement.alt = image.alt;
-                        imgElement.loading = 'eager';
-                        imgElement.decoding = 'sync';
-                        imgElement.classList.add('gallery-image');
+                        const imgElement = createLazyImage(image.src, image.alt, 'gallery-image');
                         imgElement.dataset.index = index;
                         container.appendChild(imgElement);
                     });
@@ -100,16 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
             season1Btn.classList.add('active');
             season2Btn.classList.remove('active');
 
-            // Kick off eager loading across the page
-            forceEagerLoading();
-
-            // Build a list of image URLs to preload (gallery + existing DOM images)
+            // Preload only critical images
             const galleryUrls = Object.values(seasonImages).flat().map(i => i.src);
-            const domImgUrls = Array.from(document.querySelectorAll('img'))
-                .map(img => img.getAttribute('src'));
-            preloadImages([...galleryUrls, ...domImgUrls]);
+            preloadCriticalImages(galleryUrls);
 
-            // Register a simple service worker for image caching
+            // Register a simple service worker for image/video caching
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('sw.js').catch(() => {});
             }
@@ -202,78 +211,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 season1Btn.classList.remove('active');
             });
 
-            async function fetchServerStatus() {
-                try {
-                    statusContainer.classList.add('animate-pulse');
-                    const response = await fetch(SERVER_STATUS_API_URL);
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    const data = await response.json();
-                    const isOnline = data.online;
-                    const playerCount = data.players ? `${data.players.online}/${data.players.max}` : 'N/A';
-                    const uptime = data.debug ? data.debug.query_time : 'N/A';
-                    let statusHTML = '';
-
-                    if (isOnline) {
-                        statusHTML = `
-                            <div class="flex items-center justify-center mb-4">
-                                <span class="inline-block w-3 h-3 bg-green-500 rounded-full mr-2"></span>
-                                <span class="text-xl font-semibold">Server is Online</span>
-                            </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-center">
-                                <div class="bg-gray-800 p-4 rounded-lg">
-                                    <p class="text-3xl font-bold">${playerCount}</p>
-                                    <p class="text-sm text-gray-400">Players</p>
-                                </div>
-                                <div class="bg-gray-800 p-4 rounded-lg">
-                                    <p class="text-3xl font-bold">${uptime} ms</p>
-                                    <p class="text-sm text-gray-400">Query Time</p>
-                                </div>
-                            </div>
-                        `;
-                    } else {
-                        statusHTML = `
-                            <div class="flex items-center justify-center">
-                                <span class="inline-block w-3 h-3 bg-red-500 rounded-full mr-2"></span>
-                                <span class="text-xl font-semibold">Server is Offline</span>
-                            </div>
-                        `;
-                    }
-                    statusContainer.innerHTML = statusHTML;
-                    statusContainer.classList.remove('animate-pulse');
-                } catch (error) {
-                    console.error('Failed to fetch server status:', error);
-                    statusContainer.innerHTML = `
-                        <div class="flex items-center justify-center">
-                            <span class="inline-block w-3 h-3 bg-red-500 rounded-full mr-2"></span>
-                            <span class="text-xl font-semibold">Server is Offline</span>
-                        </div>
-                    `;
-                    statusContainer.classList.remove('animate-pulse');
-                }
-            }
-
             const lenis = new Lenis()
             const heroBackground = document.getElementById('hero-bg');
             const heroContent = document.querySelector('.hero-content');
-            const heroPauseBtn = document.getElementById('hero-pause-btn');
-            const heroMuteBtn = document.getElementById('hero-mute-btn');
-            const heroPauseIcon = document.getElementById('hero-pause-icon');
-            const heroPauseLabel = document.getElementById('hero-pause-label');
-            const heroVolumeIcon = document.getElementById('hero-volume-icon');
-            const heroMuteLabel = document.getElementById('hero-mute-label');
 
+            let lastScrollPos = 0;
             lenis.on('scroll', (e) => {
                 if (heroBackground) {
                     heroBackground.style.transform = `translateY(${e.scroll * 0.5}px) translateZ(0)`;
                 }
                 if (e.scroll > 50) {
-                    mainHeader.classList.add('py-4', 'bg-black/50', 'backdrop-blur-sm');
-                    mainHeader.classList.remove('py-8');
+                    mainHeader.classList.add('py-2', 'bg-black/50', 'backdrop-blur-sm');
+                    mainHeader.classList.remove('py-12');
                 } else {
-                    mainHeader.classList.remove('py-4', 'bg-black/50', 'backdrop-blur-sm');
-                    mainHeader.classList.add('py-8');
+                    mainHeader.classList.remove('py-2', 'bg-black/50', 'backdrop-blur-sm');
+                    mainHeader.classList.add('py-12');
                 }
 
                 if (e.scroll > 400) {
@@ -292,6 +244,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     const elementTop = rect.top;
                     if (elementTop < viewportHeight - elementVisible) {
                         element.classList.add('is-visible');
+                        // Save revealed state to localStorage
+                        const elementId = element.id || element.className + '_' + Array.from(revealElements).indexOf(element);
+                        localStorage.setItem(`revealed_${elementId}`, 'true');
                     }
                 });
             })
@@ -302,116 +257,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             requestAnimationFrame(raf)
 
-            // Initialize HLS (.m3u8) source if provided via data-hls attribute
-            const initHeroMedia = async () => {
-                if (!heroBackground) return;
-                const hlsSrc = heroBackground.getAttribute('data-hls');
-                if (hlsSrc) {
-                    if (heroBackground.canPlayType('application/vnd.apple.mpegurl')) {
-                        heroBackground.src = hlsSrc;
-                    } else if (window.Hls && window.Hls.isSupported()) {
-                        const hls = new Hls({ enableWorker: true });
-                        hls.loadSource(hlsSrc);
-                        hls.attachMedia(heroBackground);
-                    }
-                }
-                try {
-                    heroBackground.muted = false;
-                    const playPromise = heroBackground.play();
-                    if (playPromise && typeof playPromise.then === 'function') {
-                        playPromise.catch(() => {
-                            heroBackground.muted = true;
-                            heroBackground.dispatchEvent(new Event('volumechange'));
-                            heroBackground.play().finally(() => {
-                                const tryUnmuteOnInteract = () => {
-                                    heroBackground.muted = false;
-                                    heroBackground.dispatchEvent(new Event('volumechange'));
-                                    if (heroBackground.paused) {
-                                        heroBackground.play().catch(() => {});
-                                    }
-                                    window.removeEventListener('click', tryUnmuteOnInteract);
-                                    window.removeEventListener('touchstart', tryUnmuteOnInteract, { passive: true });
-                                };
-                                window.addEventListener('click', tryUnmuteOnInteract);
-                                window.addEventListener('touchstart', tryUnmuteOnInteract, { passive: true });
-                            });
-                        });
-                    }
-                } catch (e) {}
-            };
-            initHeroMedia();
-
-            // Fade hero text based on video state
-            const syncHeroContentVisibility = () => {
-                if (!heroBackground || !heroContent) return;
-                if (heroBackground.paused) {
-                    heroContent.classList.remove('is-faded-out');
-                } else {
-                    heroContent.classList.add('is-faded-out');
-                }
-            };
-            if (heroBackground && heroContent) {
-                heroBackground.addEventListener('play', syncHeroContentVisibility);
-                heroBackground.addEventListener('pause', syncHeroContentVisibility);
-                heroBackground.addEventListener('ended', syncHeroContentVisibility);
-                // Initial state after attempting autoplay
-                setTimeout(syncHeroContentVisibility, 0);
-            }
-
-            // Hero video controls
-            if (heroBackground && heroPauseBtn && heroMuteBtn) {
-                // Initialize labels based on current state
-                const syncPauseUi = () => {
-                    const isPaused = heroBackground.paused;
-                    heroPauseLabel && (heroPauseLabel.textContent = isPaused ? 'Play' : 'Pause');
-                    if (heroPauseIcon) {
-                        heroPauseIcon.innerHTML = isPaused
-                            ? '<path d="M8 5v14l11-7z"/>'
-                            : '<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>'
-                    }
-                };
-                const syncMuteUi = () => {
-                    const isMuted = heroBackground.muted || heroBackground.volume === 0;
-                    heroMuteLabel && (heroMuteLabel.textContent = isMuted ? 'Unmute' : 'Mute');
-                    if (heroVolumeIcon) {
-                        heroVolumeIcon.innerHTML = isMuted
-                            ? '<path d="M16.5 12l3.5 3.5-1.5 1.5L15 13.5 11.5 17l-1.5-1.5L13.5 12 10 8.5l1.5-1.5L15 10.5l3.5-3.5 1.5 1.5L16.5 12zM3 9v6h4l5 5V4L7 9H3z"/>'
-                            : '<path d="M3 9v6h4l5 5V4L7 9H3z"/>'
-                    }
-                };
-
-                // Initial sync after potential autoplay starts
-                setTimeout(() => {
-                    syncPauseUi();
-                    syncMuteUi();
-                }, 0);
-
-                heroPauseBtn.addEventListener('click', () => {
-                    if (heroBackground.paused) {
-                        heroBackground.play();
-                    } else {
-                        heroBackground.pause();
-                    }
-                    syncPauseUi();
-                });
-
-                heroMuteBtn.addEventListener('click', () => {
-                    heroBackground.muted = !heroBackground.muted;
-                    // If unmuting and volume is 0, set to a sensible default
-                    if (!heroBackground.muted && heroBackground.volume === 0) {
-                        heroBackground.volume = 0.5;
-                    }
-                    syncMuteUi();
-                });
-
-                // Keep UI synced with actual media events
-                heroBackground.addEventListener('play', syncPauseUi);
-                heroBackground.addEventListener('pause', syncPauseUi);
-                heroBackground.addEventListener('playing', syncPauseUi);
-                heroBackground.addEventListener('volumechange', syncMuteUi);
-                heroBackground.addEventListener('loadedmetadata', syncMuteUi);
-            }
-
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -420,7 +265,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             scrollToTopBtn.addEventListener('click', () => {
-                lenis.scrollTo(0);
+                if (typeof lenis?.scrollTo === 'function') {
+                    lenis.scrollTo(0, { duration: 1.1 });
+                } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
             });
 
             const openMenu = () => {
@@ -458,8 +307,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
+            // Restore previously revealed elements on page load
+            const restoreRevealedElements = () => {
+                const revealElements = document.querySelectorAll('.reveal-element');
+                revealElements.forEach(element => {
+                    const elementId = element.id || element.className + '_' + Array.from(revealElements).indexOf(element);
+                    if (localStorage.getItem(`revealed_${elementId}`) === 'true') {
+                        element.classList.add('is-visible');
+                    }
+                });
+            };
+
             renderGallery(currentSeason);
             fetchServerStatus();
             setInterval(fetchServerStatus, 5000);
+            restoreRevealedElements();
 
         });
