@@ -768,6 +768,58 @@ body {
             }
         }
 
+.join-btn {
+    gap: 0.5rem;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* absolute icon, vertically centered; start fully off the right edge so it's clipped */
+.join-btn .discord-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translate(110%, -50%);
+    width: 22px;
+    height: 22px;
+    opacity: 0;
+    transition: transform .28s cubic-bezier(.2,.8,.2,1), opacity .28s;
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* ensure SVG fits the icon box */
+.join-btn .discord-icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* slide into place (vertically centered) */
+.join-btn:hover .discord-icon,
+.join-btn:focus-visible .discord-icon {
+    transform: translate(0, -50%); /* visible position */
+    opacity: 1;
+}
+
+/* smaller left shift so text doesn't move too far */
+.join-btn .join-text {
+    transition: transform .32s cubic-bezier(.2,.8,.2,1);
+    will-change: transform;
+}
+.join-btn:hover .join-text,
+.join-btn:focus-visible .join-text {
+    transform: translateX(-15px); /* slight nudge left */
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .join-btn .discord-icon,
+    .join-btn .join-text { transition: none; transform: none; opacity: 1; }
+}
+
         /* Season Toggle Button */
         .season-toggle-btn {
             color: #9ca3af;
