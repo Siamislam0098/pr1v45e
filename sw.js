@@ -1,12 +1,13 @@
-const CACHE_NAME = 'bhc-assets-v1';
+const CACHE_NAME = 'bhc-assets-v2';
 const ASSET_URLS = [
+  'gif/hero.mp4',
   'loaded/logo.png',
-  'showcase/1.png',
-  'showcase/2.png',
-  'showcase/3.png',
-  'showcase/4.png',
-  'showcase/5.png',
-  'showcase/6.png'
+  'showcase/Season1/1.png',
+  'showcase/Season1/2.png',
+  'showcase/Season1/3.png',
+  'showcase/Season1/4.png',
+  'showcase/Season1/5.png',
+  'showcase/Season1/6.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -23,7 +24,8 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   const req = event.request;
-  if (req.destination === 'image') {
+  const dest = req.destination;
+  if (dest === 'image' || dest === 'video') {
     event.respondWith(
       caches.match(req).then((cached) => {
         const networkFetch = fetch(req).then((res) => {
